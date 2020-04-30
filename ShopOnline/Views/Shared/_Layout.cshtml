@@ -25,18 +25,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             </div>
             <div class="header_top">
                 <div class="logo" style="width:200px;height:200px">
-                    <a href="index.html"><img src="/assets/client/images/logo.jpg" alt="" /></a>
+                    <a href="/"><img src="/assets/client/images/logo.jpg" alt="" /></a>
                 </div>
-                <div class="cart">
-                    <p>
-                        Welcome to our Online Store! <span>Cart:</span><div id="dd" class="wrapper-dropdown-2">
-                            0 item(s) - $0.00
-                            <ul class="dropdown">
-                                <li>you have no items in your Shopping cart</li>
-                            </ul>
-                        </div>
-                    </p>
-                </div>
+                @{ Html.RenderAction("headerCart", "Home");}
                 <script type="text/javascript">
 			function DropDown(el) {
 				this.dd = el;
@@ -94,6 +85,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		});
     </script>
     <a href="#" id="toTop"><span id="toTopHover"> </span></a>
+    @RenderSection("jsFooter",required:false)
 </body>
 </html>
 
