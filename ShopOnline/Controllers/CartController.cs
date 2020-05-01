@@ -1,8 +1,10 @@
-﻿using Model.Dao;
+﻿using Common;
+using Model.Dao;
 using Model.EF;
 using ShopOnline.Models;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -111,11 +113,15 @@ namespace ShopOnline.Controllers
             order.ShipAddress = address;
             order.ShipMobile = mobile;
             order.ShipEmail = email;
+            order.ShipName = shipname;
+            Product pro = new Product();
             try
             {
                 var id = new OrderDao().Insert(order);
                 var cart = (List<Caritem>)Session[CartSession];
                 var detaildao = new OrderDetailDao();
+                decimal total = 0;
+                
                 foreach (var item in cart)
                 {
                     var orderdetail = new OrderDetail();
@@ -124,7 +130,21 @@ namespace ShopOnline.Controllers
                     orderdetail.Price = item.Product.Price;
                     orderdetail.Quantily = item.Quantily;
                     detaildao.Insert(orderdetail);
+                    
+                    total += (item.Product.Price.GetValueOrDefault(0) * item.Quantily);
+                    string content = System.IO.File.ReadAllText(Server.MapPath("~/assets/client/template/neworder.html"));
 
+                    content = content.Replace("{{CustomerName}}", shipname);
+                    content = content.Replace("{{Phone}}", mobile);
+                    content = content.Replace("{{Email}}", email);
+                    content = content.Replace("{{Address}}", address);
+                    
+            
+                    content = content.Replace("{{Total}}", total.ToString("N0"));
+                    var toEmail = ConfigurationManager.AppSettings["ToEmailAddress"].ToString();
+
+                    new MailHelper().SendMail(email, "Đơn hàng mới từ ShopOnline", content);
+                    new MailHelper().SendMail(toEmail, "Đơn hàng mới từ ShopOnline", content);
                 }
             }
             catch (Exception)

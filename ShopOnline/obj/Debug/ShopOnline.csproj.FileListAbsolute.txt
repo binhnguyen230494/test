@@ -88,4 +88,5 @@ C:\Users\rrrrr\source\repos\ShopOnline\ShopOnline\bin\PagedList.dll
 C:\Users\rrrrr\source\repos\ShopOnline\ShopOnline\bin\PagedList.xml
 C:\Users\rrrrr\source\repos\ShopOnline\ShopOnline\bin\PagedList.Mvc.dll
 C:\Users\rrrrr\source\repos\ShopOnline\ShopOnline\bin\PagedList.Mvc.xml
-C:\Users\rrrrr\source\repos\ShopOnline\ShopOnline\bin\CKFinder.pdb
+C:\Users\rrrrr\source\repos\ShopOnline\ShopOnline\bin\Common.dll
+C:\Users\rrrrr\source\repos\ShopOnline\ShopOnline\bin\Common.pdb
