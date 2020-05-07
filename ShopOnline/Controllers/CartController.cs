@@ -121,7 +121,7 @@ namespace ShopOnline.Controllers
                 var cart = (List<Caritem>)Session[CartSession];
                 var detaildao = new OrderDetailDao();
                 decimal total = 0;
-                
+                string sp = "";
                 foreach (var item in cart)
                 {
                     var orderdetail = new OrderDetail();
@@ -130,7 +130,7 @@ namespace ShopOnline.Controllers
                     orderdetail.Price = item.Product.Price;
                     orderdetail.Quantily = item.Quantily;
                     detaildao.Insert(orderdetail);
-                    
+                    sp = string.Concat(sp, item.Product.Name);
                     total += (item.Product.Price.GetValueOrDefault(0) * item.Quantily);
                     string content = System.IO.File.ReadAllText(Server.MapPath("~/assets/client/template/neworder.html"));
 
@@ -138,7 +138,7 @@ namespace ShopOnline.Controllers
                     content = content.Replace("{{Phone}}", mobile);
                     content = content.Replace("{{Email}}", email);
                     content = content.Replace("{{Address}}", address);
-                    
+                    content = content.Replace("{{Name}}", sp);
             
                     content = content.Replace("{{Total}}", total.ToString("N0"));
                     var toEmail = ConfigurationManager.AppSettings["ToEmailAddress"].ToString();

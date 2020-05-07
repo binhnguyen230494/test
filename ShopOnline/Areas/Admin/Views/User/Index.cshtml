@@ -63,7 +63,7 @@
                                     @Ajax.ActionLink("Xoa", "Delete", new { @id = item.ID }, new AjaxOptions
                                {
                                    Confirm = "ban co muon xoa ban ghi nay",
-                                   OnComplete = "$('#row" + @item.ID + "').remove()",
+                                   OnComplete = "$('#row_" + @item.ID + "').remove()",
                                    HttpMethod = "Delete"
                                })
                                 </td>

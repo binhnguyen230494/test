@@ -1,8 +1,8 @@
 ﻿var user = {
     init: function () {
-        user.registerEvents();
+        user.egisterEvents();
     },
-    registerEvents: function () {
+    egisterEvents: function () {
         $('.btn-active').off('click').on('click', function (e) {
             e.preventDefault();
             var btn = $(this);
